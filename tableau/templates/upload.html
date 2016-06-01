@@ -1,12 +1,6 @@
-  {% block title %}
-
-  {% endblock %}
-     {% block content %}
-    <form method="POST" class="post-form">{% csrf_token %}
-
-          {{ upimage.as_p }}
-
-        <button type="submit" class="save btn btn-default">파일업로드</button>
-    </form>
-
-   {% endblock %}
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+    <p>1st file : <input type="file" name="File1" /></p>
+    <p>2nd file : <input type="file" name="File2" /></p>
+    <p>3rd file : <input type="file" name="File3" /></p>
+    <input type="submit" name="submit" value="Upload" />
+</form>
