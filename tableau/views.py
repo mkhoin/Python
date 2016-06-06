@@ -1,12 +1,7 @@
 from django.shortcuts import render
-
-from django.http import *
-import random
-import string
 from .analyze import *
-
-from .forms import *
 from django.http import *
+from django.core.exceptions import ValidationError
 import random
 import string
 
@@ -26,7 +21,10 @@ def index(request):
             with open('./upload/%s' % fname, 'wb') as destination:
                 for chunk in request.FILES[file].chunks():
                     destination.write(chunk)
+                try :
                     result.append(list(colorz('./upload/%s' % fname)))
+                except ValidationError:
+                     return render(request, 'upload.html')
         return HttpResponse('%s uploaded!' %result)
     return render(request, 'upload.html')
 
